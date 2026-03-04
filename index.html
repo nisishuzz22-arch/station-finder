@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集合駅検索 - 中間地点の駅を探す</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f4f8;color:#333;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:16px}
+h1{text-align:center;color:#2c5282;margin:16px 0 6px;font-size:1.5em}
+.subtitle{text-align:center;color:#718096;margin-bottom:20px;font-size:.85em}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:20px;margin-bottom:16px}
+.station-inputs{display:flex;flex-direction:column;gap:10px}
+.station-row{display:flex;align-items:center;gap:8px;position:relative}
+.station-row label{min-width:64px;font-weight:600;color:#4a5568;font-size:.85em}
+.station-row input{flex:1;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:16px;transition:border-color .2s;appearance:none;-webkit-appearance:none}
+.station-row input:focus{outline:none;border-color:#4299e1}
+.suggest-list{position:absolute;top:100%;left:72px;right:36px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:100;max-height:180px;overflow-y:auto;display:none}
+.suggest-item{padding:10px 14px;cursor:pointer;font-size:.9em;border-bottom:1px solid #f7fafc}
+.suggest-item:last-child{border-bottom:none}
+.suggest-item:hover,.suggest-item.active{background:#ebf8ff}
+.suggest-item .line-info{color:#a0aec0;font-size:.75em;display:block;margin-top:2px}
+.btn-remove{background:none;border:none;color:#e53e3e;font-size:1.2em;cursor:pointer;padding:4px 8px;border-radius:4px}
+.btn-remove:hover{background:#fed7d7}
+.actions{display:flex;gap:10px;margin-top:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:.95em;cursor:pointer;font-weight:600;transition:all .2s;touch-action:manipulation}
+.btn-primary{background:#4299e1;color:#fff}
+.btn-primary:hover{background:#3182ce}
+.btn-primary:disabled{background:#a0aec0;cursor:not-allowed}
+.btn-secondary{background:#edf2f7;color:#4a5568}
+.btn-secondary:hover{background:#e2e8f0}
+.rank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:.75em;font-weight:700;margin-right:6px}
+.rank-1{background:#ffd700;color:#744210}
+.rank-2{background:#c0c0c0;color:#4a5568}
+.rank-3{background:#cd7f32;color:#fff}
+.rank-other{background:#edf2f7;color:#718096}
+.init-loading{text-align:center;padding:40px;color:#718096;font-size:1.1em}
+@media(max-width:600px){.container{padding:10px}.card{padding:14px}.station-row label{min-width:54px;font-size:.8em}.suggest-list{left:62px;right:30px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>&#x1F683; 集合駅検索</h1>
+<p class="subtitle">複数の出発駅から中間地点にある駅を探します（最大10駅）</p>
+<div id="initLoading" class="init-loading">駅データを読み込み中...</div>
+<div id="mainApp" style="display:none">
+<div class="card">
+<div class="station-inputs" id="stationInputs"></div>
+<div class="actions">
+<button class="btn btn-secondary" onclick="addStation()" id="btnAdd">＋ 出発駅を追加</button>
+<button class="btn btn-primary" onclick="doSearch()" id="btnSearch">検索</button>
+</div></div>
+<div id="resultArea"></div>
+</div></div>
+<script src="app.js"></script>
+</body>
+</html>
