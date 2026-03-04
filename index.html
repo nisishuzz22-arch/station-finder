@@ -51,6 +51,39 @@ h1{text-align:center;color:#2c5282;margin:16px 0 6px;font-size:1.5em}
 <button class="btn btn-secondary" onclick="addStation()" id="btnAdd">＋ 出発駅を追加</button>
 <button class="btn btn-primary" onclick="doSearch()" id="btnSearch">検索</button>
 </div></div>
+<div class="card" style="margin-top:0">
+<div style="font-size:.9em;font-weight:600;color:#4a5568;margin-bottom:10px">🍽️ グルメ検索（任意）</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<div style="flex:1;min-width:140px">
+<label for="genre" style="font-size:.75em;color:#718096;display:block;margin-bottom:3px">ジャンル</label>
+<select id="genre" style="width:100%;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;appearance:auto">
+<option value="">指定なし</option>
+<option value="居酒屋">居酒屋</option>
+<option value="和食">和食</option>
+<option value="寿司">寿司</option>
+<option value="焼肉">焼肉</option>
+<option value="イタリアン">イタリアン</option>
+<option value="フレンチ">フレンチ</option>
+<option value="中華">中華</option>
+<option value="ラーメン">ラーメン</option>
+<option value="カフェ">カフェ</option>
+<option value="バー">バー</option>
+</select>
+</div>
+<div style="flex:1;min-width:140px">
+<label for="budget" style="font-size:.75em;color:#718096;display:block;margin-bottom:3px">予算（1人あたり）</label>
+<select id="budget" style="width:100%;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-size:14px;appearance:auto">
+<option value="">指定なし</option>
+<option value="1000">〜1,000円</option>
+<option value="2000">〜2,000円</option>
+<option value="3000">〜3,000円</option>
+<option value="5000">〜5,000円</option>
+<option value="8000">〜8,000円</option>
+<option value="10000">〜10,000円</option>
+</select>
+</div>
+</div>
+</div>
 <div id="resultArea"></div>
 </div></div>
 <script src="app.js"></script>

@@ -330,6 +330,30 @@ function calculateMeetingStations(departures){
 }
 
 // ===== 結果表示 =====
+function buildSearchLinks(stationName,idx){
+  var genre=document.getElementById('genre').value;
+  var budget=document.getElementById('budget').value;
+  var keyword=genre||'グルメ';
+
+  // Google検索リンク
+  var googleQ=stationName+' '+keyword;
+  if(budget) googleQ+=' '+budget+'円以下';
+  var googleUrl='https://www.google.com/search?q='+encodeURIComponent(googleQ);
+
+  var shopId='shop-'+idx;
+  var html=' <span onclick="toggleDetail(\''+shopId+'\')" style="display:inline-block;background:#ff6b35;color:#fff;padding:2px 10px;border-radius:6px;font-size:.7em;font-weight:600;cursor:pointer;margin-left:6px;user-select:none">🍽️ お店検索</span>';
+  html+='<div id="'+shopId+'" style="display:none;margin-top:6px;padding:8px 12px;background:#fffaf0;border-radius:6px;font-size:.8em">';
+  html+='<a href="'+googleUrl+'" target="_blank" rel="noopener" style="color:#4285f4;text-decoration:none;font-weight:600">🔍 Googleで探す</a>';
+  if(genre||budget){
+    html+='<div style="margin-top:4px;font-size:.8em;color:#a0aec0">';
+    if(genre) html+='ジャンル: '+genre+' ';
+    if(budget) html+='予算: 〜'+Number(budget).toLocaleString()+'円';
+    html+='</div>';
+  }
+  html+='</div>';
+  return html;
+}
+
 function renderResults(departures,results){
   var area=document.getElementById('resultArea');
   if(!results.length){
@@ -350,7 +374,7 @@ function renderResults(departures,results){
         html+=' <span style="display:inline-block;'+bc+';padding:1px 8px;border-radius:10px;font-size:.65em;font-weight:600;margin-left:4px">'+r.badges[bi]+'</span>';
       }
     }
-    html+=' <a href="https://www.google.com/search?q='+encodeURIComponent(r.name+' 居酒屋')+'" target="_blank" rel="noopener" style="font-size:.7em;color:#e53e3e;text-decoration:none;margin-left:6px">🍺居酒屋を検索</a></div>';
+    html+=buildSearchLinks(r.name,i)+'</div>';
     html+='<div style="color:#718096;font-size:.75em;margin:3px 0 8px;line-height:1.4">'+stInfo.lines.join(' / ')+'</div>';
     html+='<table style="width:100%;border-collapse:collapse;font-size:.85em">';
     html+='<tr><th style="text-align:left;padding:4px 6px;color:#718096;font-weight:500;border-bottom:1px solid #e2e8f0">出発駅</th>';
